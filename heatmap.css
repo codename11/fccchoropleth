@@ -1,0 +1,39 @@
+svg{
+    padding: 20px;
+}
+
+text .title{
+    font-size: 16px;
+}
+
+.axis text{
+    font-size: 8px;
+}
+
+.cell{
+    fill: navy;
+    border: 1px solid red;
+}
+
+.headline{
+    font-size: 32px;
+}
+
+.headline1{
+    font-size: 16px;
+}
+
+#tooltip{
+    border: 1px solid silver;
+    background-color: whitesmoke;
+    box-shadow:10px 10px 40px 5px whitesmoke; 
+    border-radius: 5px;
+    position: absolute !important;
+    padding: 10px;
+    text-align: center;
+}
+
+#demo{
+    margin-left: auto;
+    margin-right: auto;
+}
