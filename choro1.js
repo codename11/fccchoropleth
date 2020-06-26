@@ -89,7 +89,7 @@ $(document).ready( () => {
       .defer(d3.json, url1)
       .await(callback);//callback function bellow.
 
-  function callback(error, us, education){
+  function callback(error, countryData, eduData){
 
     //Error sent to callback for handling.
     if(error){
@@ -99,7 +99,7 @@ $(document).ready( () => {
     svg.append("g")
         .attr("class", "counties")
         .selectAll("path")//How topojson extract needed coordinates from this dataset god knows.
-        .data(topojson.feature(us, us.objects.counties).features)
+        .data(topojson.feature(countryData, countryData.objects.counties).features)
         .enter().append("path")
         .attr("class", "county")
         .attr("data-fips", (d) => {
@@ -109,7 +109,7 @@ $(document).ready( () => {
         })
         .attr("data-education", (d) => {
           
-          let result = education.filter(( obj ) => {
+          let result = eduData.filter(( obj ) => {
             return obj.fips == d.id;
           });
 
@@ -123,7 +123,7 @@ $(document).ready( () => {
         })
         .attr("fill", (d) => { 
           
-          let result = education.filter(( obj ) => {
+          let result = eduData.filter(( obj ) => {
             return obj.fips == d.id;
           });
 
@@ -141,7 +141,7 @@ $(document).ready( () => {
           tooltip.style("opacity", 0.7); 
           tooltip.html(() => {
 
-            let  res = education.filter(( obj ) => {
+            let  res = eduData.filter(( obj ) => {
 
               return obj.fips == d.id;
 
@@ -158,7 +158,7 @@ $(document).ready( () => {
         })
         .attr("data-education", () => {
 
-          let res = education.filter(( obj ) => {
+          let res = eduData.filter(( obj ) => {
 
             return obj.fips == d.id;
 
@@ -182,7 +182,7 @@ $(document).ready( () => {
         });
 
     svg.append("path")
-        .datum(topojson.mesh(us, us.objects.states, (a, b) => { 
+        .datum(topojson.mesh(countryData, countryData.objects.states, (a, b) => { 
           return a !== b; 
         }))
         .attr("class", "states")
@@ -191,19 +191,3 @@ $(document).ready( () => {
   }
 
 });
-
-async function choro(url = '', data = {}) {
-	  
-  let result = await fetch(url)
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => {
-        console.error('Error:', error);
-  }); 
-  
-  return result;
-
-}
-
-//choro(url1, {});//education
-//choro(url2, {});//counties
