@@ -16,7 +16,7 @@ $(document).ready( () => {
 
   let x = d3.scaleLinear()
       .domain([2.6, 75.1])
-      .rangeRound([600, 860]);
+      .rangeRound([600, 960]);
 
   let color = d3.scaleThreshold()
       .domain(d3.range(2.6, 75.1, (75.1-2.6)/8))
@@ -39,11 +39,15 @@ $(document).ready( () => {
         d = color.invertExtent(d);
         
         if(d[0] == null){
+
           d[0] = x.domain()[0];
+
         }
 
         if(d[1] == null){
-          d[1] = x.domain()[1]
+
+          d[1] = x.domain()[1];
+
         }
 
         return d;
@@ -62,7 +66,9 @@ $(document).ready( () => {
 
       })
       .attr("fill", (d) => { 
+
         return color(d[0]); 
+
       });
 
   g.append("text")
@@ -110,11 +116,15 @@ $(document).ready( () => {
         .attr("data-education", (d) => {
           
           let result = eduData.filter(( obj ) => {
+
             return obj.fips == d.id;
+
           });
 
           if(result[0]){
+
             return result[0].bachelorsOrHigher;
+
           }
           
           console.log("Error. No data for: ", d.id);
@@ -124,7 +134,9 @@ $(document).ready( () => {
         .attr("fill", (d) => { 
           
           let result = eduData.filter(( obj ) => {
+
             return obj.fips == d.id;
+
           });
 
           if(result[0]){
@@ -183,7 +195,9 @@ $(document).ready( () => {
 
     svg.append("path")
         .datum(topojson.mesh(countryData, countryData.objects.states, (a, b) => { 
+
           return a !== b; 
+          
         }))
         .attr("class", "states")
         .attr("d", path);
